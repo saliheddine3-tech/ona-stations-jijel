@@ -1,0 +1,6 @@
+{
+  "name": "مركز المحطات",
+  "description": "تطبيق تسيير وإشراف على 16 محطة رفع وإدارة مناوبات 76 عاملاً والتعويض الذكي والعدادات الساعية والمولدات",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
