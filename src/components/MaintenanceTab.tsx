@@ -196,7 +196,7 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
         {/* 3 Main Specialties Pills */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4 pt-4 border-t border-slate-800">
           <div className="bg-slate-950/70 p-3 rounded-xl border border-cyan-900/40 flex items-center gap-3">
-            <RotateCcw className="w-5 h-5 text-cyan-400 shrink-0" />
+            <RotateCcw className="w-5 h-5 text-cyan-800 shrink-0" />
             <div>
               <div className="text-xs font-bold text-white">المضخات وموانع التسرب</div>
               <div className="text-[11px] text-slate-800">فحص دوري، محامل، حواشي العزل</div>
@@ -311,7 +311,7 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
                     <h3 className="font-bold text-white text-sm">{ticket.title}</h3>
                   </div>
                   <div className="text-xs text-slate-800 flex items-center gap-2">
-                    <Building2 className="w-3.5 h-3.5 text-cyan-400" />
+                    <Building2 className="w-3.5 h-3.5 text-cyan-800" />
                     <span>المحطة: <strong>{ticket.stationName}</strong></span>
                     {station && <PhoneLink phone={station.phone} name={station.name} variant="compact" />}
                     <span>•</span>
