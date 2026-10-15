@@ -491,7 +491,7 @@ class StorageService {
     }
   }
 
-    public async flushSyncQueue() {
+      public async flushSyncQueue() {
     const queue = this.getSyncQueue();
     if (queue.length === 0 || !this.isOnline) return;
 
