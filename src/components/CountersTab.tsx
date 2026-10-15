@@ -300,7 +300,7 @@ export const CountersTab: React.FC<CountersTabProps> = ({
               سجل العداد الساعي للمضخات وشبكة بيانات المولد والكهرباء (8×2)
             </h2>
           </div>
-          <p className="text-xs text-slate-400 max-w-3xl">
+          <p className="text-xs text-slate-800 max-w-3xl">
             تسجيل العداد الساعي الشهري للمضخات (6 إلى 8 أرقام)، وجدول ذو صفين: 8 خانات علوية لبيانات المولد، و8 خانات سفلية لأرقام العداد الكهربائي.
           </p>
         </div>
@@ -308,7 +308,7 @@ export const CountersTab: React.FC<CountersTabProps> = ({
         <div className="flex items-center gap-2 shrink-0">
           <button
             onClick={handlePrint}
-            className="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-xl border border-slate-700 flex items-center gap-1.5 transition-colors"
+            className="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-700 text-xs font-semibold rounded-xl border border-slate-700 flex items-center gap-1.5 transition-colors"
           >
             <Printer className="w-4 h-4" />
             <span>طباعة السجل</span>
@@ -328,7 +328,7 @@ export const CountersTab: React.FC<CountersTabProps> = ({
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-slate-900 p-4 rounded-xl border border-slate-800">
         <div className="flex items-center gap-3">
           <Building2 className="w-4 h-4 text-cyan-400" />
-          <span className="text-xs text-slate-300 font-bold">المحطة المحددة:</span>
+          <span className="text-xs text-slate-700 font-bold">المحطة المحددة:</span>
           <select
             value={selectedStationId}
             onChange={e => handleStationChange(e.target.value)}
@@ -344,7 +344,7 @@ export const CountersTab: React.FC<CountersTabProps> = ({
 
         {selectedStation && (
           <div className="flex items-center gap-3 text-xs">
-            <span className="text-slate-400">هاتف المحطة:</span>
+            <span className="text-slate-800">هاتف المحطة:</span>
             <PhoneLink phone={selectedStation.phone} name={selectedStation.name} variant="compact" />
           </div>
         )}
@@ -393,8 +393,8 @@ export const CountersTab: React.FC<CountersTabProps> = ({
         <div className="overflow-x-auto rounded-xl border border-slate-800 bg-slate-900/60 p-3">
           <table className="w-full min-w-[760px] border-collapse text-right text-xs">
             <thead>
-              <tr className="bg-slate-900 text-slate-400 text-[11px] border-b border-slate-800">
-                <th className="p-2.5 text-center font-bold text-slate-300 w-28 bg-slate-950/90 border-l border-slate-800">
+              <tr className="bg-slate-900 text-slate-800 text-[11px] border-b border-slate-800">
+                <th className="p-2.5 text-center font-bold text-slate-700 w-28 bg-slate-950/90 border-l border-slate-800">
                   السطر / الخانة
                 </th>
                 {electricMeterCells.map((_, i) => (
@@ -458,7 +458,7 @@ export const CountersTab: React.FC<CountersTabProps> = ({
             <span>يدعم أرقاماً طويلة تصل إلى 9 أرقام بدقة تامة لكل خلية.</span>
           </div>
           <div className="font-mono text-slate-500">
-            LocalStorage Key: <span className="text-slate-300">mm_electric_meter_{selectedStationId}</span>
+            LocalStorage Key: <span className="text-slate-700">mm_electric_meter_{selectedStationId}</span>
           </div>
         </div>
       </div>
@@ -478,11 +478,11 @@ export const CountersTab: React.FC<CountersTabProps> = ({
                     <span className="text-sm font-black text-white">
                       قراءة شهر: <span className="font-mono text-cyan-400">{record.month}</span>
                     </span>
-                    <span className="text-xs text-slate-400 font-mono">
+                    <span className="text-xs text-slate-800 font-mono">
                       (تاريخ: {record.date})
                     </span>
                   </div>
-                  <div className="text-xs text-slate-400 flex items-center gap-2">
+                  <div className="text-xs text-slate-800 flex items-center gap-2">
                     <span>المسجل: <strong>{record.recorderName}</strong></span>
                     <PhoneLink phone={record.recorderPhone} name={record.recorderName} variant="compact" />
                   </div>
@@ -536,13 +536,13 @@ export const CountersTab: React.FC<CountersTabProps> = ({
 
                       {/* 8-Digit Display */}
                       <div className="bg-slate-900 p-2 rounded-lg border border-slate-700/80 text-center">
-                        <div className="text-[10px] text-slate-400 mb-0.5">القراءة الحالية (ساعات)</div>
+                        <div className="text-[10px] text-slate-800 mb-0.5">القراءة الحالية (ساعات)</div>
                         <div className="text-lg font-black font-mono tracking-widest text-emerald-400" dir="ltr">
                           {p.currentHours}
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1 border-t border-slate-800">
+                      <div className="flex items-center justify-between text-[11px] text-slate-800 pt-1 border-t border-slate-800">
                         <span>الساعات المنجزة هذا الشهر:</span>
                         <span className="font-bold text-white font-mono">
                           {p.operatingHours || 0} ساعة
@@ -560,7 +560,7 @@ export const CountersTab: React.FC<CountersTabProps> = ({
                     <Zap className="w-4 h-4 text-amber-400" />
                     <span>جدول القياسات المشترك (8 خانات علوية للمولد + 8 خانات سفلية للعداد الكهربائي):</span>
                   </span>
-                  <span className="text-[11px] text-slate-400 font-mono">شبكة 8×2 خانة</span>
+                  <span className="text-[11px] text-slate-800 font-mono">شبكة 8×2 خانة</span>
                 </div>
 
                 <div className="overflow-x-auto rounded-xl border border-slate-800 bg-slate-950">
@@ -662,8 +662,8 @@ export const CountersTab: React.FC<CountersTabProps> = ({
               </div>
 
               {record.notes && (
-                <div className="text-xs text-slate-400 bg-slate-950 p-2.5 rounded-lg border border-slate-800">
-                  <strong className="text-slate-300">ملاحظات:</strong> {record.notes}
+                <div className="text-xs text-slate-800 bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+                  <strong className="text-slate-700">ملاحظات:</strong> {record.notes}
                 </div>
               )}
             </div>
@@ -673,7 +673,7 @@ export const CountersTab: React.FC<CountersTabProps> = ({
         {stationCounters.length === 0 && (
           <div className="text-center py-12 bg-slate-900 rounded-2xl border border-slate-800 text-slate-400">
             <Gauge className="w-12 h-12 text-slate-600 mx-auto mb-3" />
-            <p className="text-base font-bold text-slate-300">لا توجد قراءات مسجلة لهذه المحطة حتى الآن</p>
+            <p className="text-base font-bold text-slate-700">لا توجد قراءات مسجلة لهذه المحطة حتى الآن</p>
             <p className="text-xs text-slate-500 mt-1">انقر على "تسجيل قراءة شهرية جديدة" لإدخال عدادات المضخات وشبكة 8×2.</p>
           </div>
         )}
@@ -687,7 +687,7 @@ export const CountersTab: React.FC<CountersTabProps> = ({
             <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-950/60 shrink-0">
               <button
                 onClick={() => setIsAddModalOpen(false)}
-                className="p-1 text-slate-400 hover:text-white"
+                className="p-1 text-slate-800 hover:text-white"
               >
                 ✕
               </button>
@@ -703,7 +703,7 @@ export const CountersTab: React.FC<CountersTabProps> = ({
               
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">المحطة</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">المحطة</label>
                   <select
                     value={formStationId}
                     onChange={e => {
@@ -729,7 +729,7 @@ export const CountersTab: React.FC<CountersTabProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">الشهر</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">الشهر</label>
                   <input
                     type="month"
                     value={formMonth}
@@ -740,7 +740,7 @@ export const CountersTab: React.FC<CountersTabProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">تاريخ المعاينة</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">تاريخ المعاينة</label>
                   <input
                     type="date"
                     value={formDate}
@@ -764,7 +764,7 @@ export const CountersTab: React.FC<CountersTabProps> = ({
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">رقم الهاتف للاتصال</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">رقم الهاتف للاتصال</label>
                   <input
                     type="tel"
                     value={formRecorderPhone}
@@ -787,7 +787,7 @@ export const CountersTab: React.FC<CountersTabProps> = ({
                   {formPumps.map((pump, idx) => (
                     <div key={pump.pumpNumber} className="grid grid-cols-3 gap-2 bg-slate-900 p-2.5 rounded-lg border border-slate-800">
                       <div>
-                        <label className="block text-[11px] text-slate-400 mb-1 font-bold">
+                        <label className="block text-[11px] text-slate-800 mb-1 font-bold">
                           المضخة {pump.pumpNumber}
                         </label>
                         <select
@@ -806,7 +806,7 @@ export const CountersTab: React.FC<CountersTabProps> = ({
                       </div>
 
                       <div className="col-span-2">
-                        <label className="block text-[11px] text-slate-400 mb-1">
+                        <label className="block text-[11px] text-slate-800 mb-1">
                           قراءة العداد الساعي (6-8 أرقام)
                         </label>
                         <input
@@ -828,7 +828,7 @@ export const CountersTab: React.FC<CountersTabProps> = ({
               <div className="p-3.5 bg-slate-950 rounded-xl border border-slate-800 space-y-3">
                 <div className="text-xs font-bold text-amber-300 flex items-center justify-between">
                   <span>جدول القياسات 8×2:</span>
-                  <span className="text-[10px] text-slate-400">8 خانات للمولد (أعلى) + 8 خانات للعداد الكهربائي (أسفل)</span>
+                  <span className="text-[10px] text-slate-800">8 خانات للمولد (أعلى) + 8 خانات للعداد الكهربائي (أسفل)</span>
                 </div>
 
                 {/* Row 1: 8 Cells Generator */}
@@ -838,7 +838,7 @@ export const CountersTab: React.FC<CountersTabProps> = ({
                   </span>
                   <div className="grid grid-cols-4 sm:grid-cols-8 gap-1.5">
                     <div>
-                      <span className="text-[9px] text-slate-400 block truncate">1. الساعات</span>
+                      <span className="text-[9px] text-slate-800 block truncate">1. الساعات</span>
                       <input
                         type="text"
                         value={formGenerator.cell1}
@@ -847,7 +847,7 @@ export const CountersTab: React.FC<CountersTabProps> = ({
                       />
                     </div>
                     <div>
-                      <span className="text-[9px] text-slate-400 block truncate">2. الوقود</span>
+                      <span className="text-[9px] text-slate-800 block truncate">2. الوقود</span>
                       <input
                         type="text"
                         value={formGenerator.cell2}
@@ -856,7 +856,7 @@ export const CountersTab: React.FC<CountersTabProps> = ({
                       />
                     </div>
                     <div>
-                      <span className="text-[9px] text-slate-400 block truncate">3. ضغط الزيت</span>
+                      <span className="text-[9px] text-slate-800 block truncate">3. ضغط الزيت</span>
                       <input
                         type="text"
                         value={formGenerator.cell3}
@@ -865,7 +865,7 @@ export const CountersTab: React.FC<CountersTabProps> = ({
                       />
                     </div>
                     <div>
-                      <span className="text-[9px] text-slate-400 block truncate">4. الحرارة</span>
+                      <span className="text-[9px] text-slate-800 block truncate">4. الحرارة</span>
                       <input
                         type="text"
                         value={formGenerator.cell4}
@@ -874,7 +874,7 @@ export const CountersTab: React.FC<CountersTabProps> = ({
                       />
                     </div>
                     <div>
-                      <span className="text-[9px] text-slate-400 block truncate">5. البطارية</span>
+                      <span className="text-[9px] text-slate-800 block truncate">5. البطارية</span>
                       <input
                         type="text"
                         value={formGenerator.cell5}
@@ -883,7 +883,7 @@ export const CountersTab: React.FC<CountersTabProps> = ({
                       />
                     </div>
                     <div>
-                      <span className="text-[9px] text-slate-400 block truncate">6. التردد</span>
+                      <span className="text-[9px] text-slate-800 block truncate">6. التردد</span>
                       <input
                         type="text"
                         value={formGenerator.cell6}
@@ -892,7 +892,7 @@ export const CountersTab: React.FC<CountersTabProps> = ({
                       />
                     </div>
                     <div>
-                      <span className="text-[9px] text-slate-400 block truncate">7. الجهد</span>
+                      <span className="text-[9px] text-slate-800 block truncate">7. الجهد</span>
                       <input
                         type="text"
                         value={formGenerator.cell7}
@@ -901,7 +901,7 @@ export const CountersTab: React.FC<CountersTabProps> = ({
                       />
                     </div>
                     <div>
-                      <span className="text-[9px] text-slate-400 block truncate">8. الحمل</span>
+                      <span className="text-[9px] text-slate-800 block truncate">8. الحمل</span>
                       <input
                         type="text"
                         value={formGenerator.cell8}
