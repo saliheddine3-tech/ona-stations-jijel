@@ -104,7 +104,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Sync & Connectivity & User Profile Actions */}
-          <button
+          <div className="flex items-center gap-3">
+            <button
               onClick={() => {
                 onManualSync();
                 setTimeout(() => {
@@ -207,7 +208,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="flex items-center gap-3">
           <div className="w-13 h-13 rounded-2xl bg-slate-950 p-1 border-2 border-cyan-500/40 shadow-lg flex items-center justify-center overflow-hidden shrink-0">
             <img
-             src={`${import.meta.env.BASE_URL}ona-logo.webp`}
+              src={`${import.meta.env.BASE_URL}ona-logo.webp`}
               alt="شعار الديوان الوطني للتطهير وحدة جيجل"
               className="w-full h-full object-contain filter drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)]"
             />
@@ -267,25 +268,25 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Dynamic Navigation Tabs */}
           <nav className="flex items-center gap-1 overflow-x-auto py-1 scrollbar-none">
-          {visibleTabs.map(tab => {
-            const Icon = tab.icon;
-            const isActive = activeTab === tab.id;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
-                  isActive
-                    ? 'bg-cyan-600 text-white shadow-md shadow-cyan-900/40 border border-cyan-400/30'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/80 border border-transparent'
-                }`}
-              >
-                <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-slate-400'}`} />
-                <span>{tab.label}</span>
-              </button>
-            );
-          })}
-        </nav>
+            {visibleTabs.map(tab => {
+              const Icon = tab.icon;
+              const isActive = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+                    isActive
+                      ? 'bg-cyan-600 text-white shadow-md shadow-cyan-900/40 border border-cyan-400/30'
+                      : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/80 border border-transparent'
+                  }`}
+                >
+                  <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-slate-400'}`} />
+                  <span>{tab.label}</span>
+                </button>
+              );
+            })}
+          </nav>
         </div>
       </div>
     </header>
