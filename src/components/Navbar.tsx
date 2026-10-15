@@ -201,7 +201,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="flex items-center gap-3">
           <div className="w-13 h-13 rounded-2xl bg-slate-950 p-1 border-2 border-cyan-500/40 shadow-lg flex items-center justify-center overflow-hidden shrink-0">
             <img
-              src="/ona-logo.svg"
+             src={`${import.meta.env.BASE_URL}ona-logo.webp`}
               alt="شعار الديوان الوطني للتطهير وحدة جيجل"
               className="w-full h-full object-contain filter drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)]"
             />
