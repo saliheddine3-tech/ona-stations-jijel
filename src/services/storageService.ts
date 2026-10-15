@@ -491,7 +491,7 @@ class StorageService {
     }
   }
 
-  public async flushSyncQueue() {
+    public async flushSyncQueue() {
     const queue = this.getSyncQueue();
     if (queue.length === 0 || !this.isOnline) return;
 
@@ -507,13 +507,16 @@ class StorageService {
           events: queue
         })
       });
-   if (response.ok) {
-  this.setSyncQueue([]);
-  this.lastSyncedAt = new Date().toLocaleTimeString();
-}
-} catch {
-  // Keep queue for next attempt
-} finally {
-  this.isSyncing = false;
-  this.notifySync();
+
+      if (response.ok) {
+        this.setSyncQueue([]);
+        this.lastSyncedAt = new Date().toLocaleTimeString();
+      }
+    } catch {
+      // Keep queue for next attempt
+    } finally {
+      this.isSyncing = false;
+      this.notifySync();
+    }
+  }
 }
