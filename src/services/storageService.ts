@@ -145,16 +145,26 @@ export class StorageService {
     }
   }
 
-  public getSyncStatus(): SyncStatus {
+ public getSyncStatus(): SyncStatus {
     const queue = this.getSyncQueue();
-    return {
-      isOnline: this.isOnline,
-      isSyncing: this.isSyncing,
-      lastSyncedAt: this.lastSyncedAt,
-      pendingChangesCount: queue.length
-    };
-  }
+    
+    // حماية أمان إضافية: إذا ظلت حالة isSyncing مفعلة لأكثر من 4 ثوانٍ، يتم إيقافها قسرياً لمنع تعليق السهم
+    if (this.isSyncing) {
+        setTimeout(() => {
+            if (this.isSyncing) {
+                this.isSyncing = false;
+                this.notifySync();
+            }
+        }, 4000);
+    }
 
+    return {
+        isOnline: this.isOnline,
+        isSyncing: this.isSyncing,
+        lastSyncedAt: this.lastSyncedAt,
+        pendingChangesCount: queue.length
+    };
+}
   public getData(): AppData {
     return this.data;
   }
