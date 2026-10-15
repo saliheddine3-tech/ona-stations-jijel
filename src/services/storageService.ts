@@ -41,7 +41,7 @@ export interface SyncStatus {
 type Listener = (data: AppData) => void;
 type SyncListener = (status: SyncStatus) => void;
 
-class StorageService {
+export class StorageService {
   private data: AppData;
   private listeners: Set<Listener> = new Set();
   private syncListeners: Set<SyncListener> = new Set();
@@ -518,5 +518,3 @@ class StorageService {
       this.isSyncing = false;
       this.notifySync();
     }
-  }
-}
