@@ -518,3 +518,5 @@ export class StorageService {
       this.isSyncing = false;
       this.notifySync();
     }
+  }
+}
