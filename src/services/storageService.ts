@@ -514,7 +514,10 @@ class StorageService {
       }
     } catch {
       // Keep queue for next attempt
-    } finally {
+   } finally {
+  this.isSyncing = false;
+  this.notifySync();
+}
       this.isSyncing = false;
       this.notifySync();
     }
