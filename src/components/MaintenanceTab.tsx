@@ -135,7 +135,7 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
           className={`px-5 py-2.5 rounded-2xl text-xs font-bold transition-all flex items-center gap-2 ${
             activeSubTab === 'preventive'
               ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-lg shadow-cyan-900/40'
-              : 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800'
+              : 'bg-slate-900 text-slate-800 hover:text-white border border-slate-800'
           }`}
         >
           <ShieldCheck className="w-4 h-4 text-emerald-400" />
@@ -148,7 +148,7 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
           className={`px-5 py-2.5 rounded-2xl text-xs font-bold transition-all flex items-center gap-2 ${
             activeSubTab === 'tickets'
               ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-lg shadow-cyan-900/40'
-              : 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800'
+              : 'bg-slate-900 text-slate-800 hover:text-white border border-slate-800'
           }`}
         >
           <Wrench className="w-4 h-4 text-amber-400" />
@@ -178,7 +178,7 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
                   عون الصيانة الكهروميكانيكية
                 </span>
               </div>
-              <p className="text-xs text-slate-300">
+              <p className="text-xs text-slate-700">
                 المختص في الأمور الكهربائية والميكانيكية لمحطات الرفع الـ 16 من{' '}
                 <span className="text-cyan-300 font-bold">مضخات</span>، و
                 <span className="text-amber-300 font-bold">إنارة</span>، و
@@ -188,7 +188,7 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
           </div>
 
           <div className="flex items-center gap-3 bg-slate-950 p-2.5 px-4 rounded-xl border border-slate-800">
-            <span className="text-xs text-slate-400">الاتصال المباشر بعون الصيانة:</span>
+            <span className="text-xs text-slate-800">الاتصال المباشر بعون الصيانة:</span>
             <PhoneLink phone={MAINTENANCE_AGENT.phone} name={MAINTENANCE_AGENT.fullName} variant="button" />
           </div>
         </div>
@@ -199,7 +199,7 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
             <RotateCcw className="w-5 h-5 text-cyan-400 shrink-0" />
             <div>
               <div className="text-xs font-bold text-white">المضخات وموانع التسرب</div>
-              <div className="text-[11px] text-slate-400">فحص دوري، محامل، حواشي العزل</div>
+              <div className="text-[11px] text-slate-800">فحص دوري، محامل، حواشي العزل</div>
             </div>
           </div>
 
@@ -207,7 +207,7 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
             <Lightbulb className="w-5 h-5 text-amber-400 shrink-0" />
             <div>
               <div className="text-xs font-bold text-white">إنارة المحطات والكواشف</div>
-              <div className="text-[11px] text-slate-400">الإنارة الليلية وأمان المحيط</div>
+              <div className="text-[11px] text-slate-800">الإنارة الليلية وأمان المحيط</div>
             </div>
           </div>
 
@@ -215,7 +215,7 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
             <Zap className="w-5 h-5 text-blue-400 shrink-0" />
             <div>
               <div className="text-xs font-bold text-white">المولدات ولوحات التحكم</div>
-              <div className="text-[11px] text-slate-400">إقلاع آلي، شواحن البطاريات، الوقود</div>
+              <div className="text-[11px] text-slate-800">إقلاع آلي، شواحن البطاريات، الوقود</div>
             </div>
           </div>
         </div>
@@ -231,7 +231,7 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
             className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
               filterCategory === 'all'
                 ? 'bg-cyan-600 text-white'
-                : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                : 'bg-slate-800 text-slate-700 hover:bg-slate-700'
             }`}
           >
             الكل ({maintenance.length})
@@ -241,7 +241,7 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
             className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
               filterCategory === 'مضخات'
                 ? 'bg-cyan-600 text-white'
-                : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                : 'bg-slate-800 text-slate-700 hover:bg-slate-700'
             }`}
           >
             المضخات
@@ -251,7 +251,7 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
             className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
               filterCategory === 'مولدات_كهربائية'
                 ? 'bg-blue-600 text-white'
-                : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                : 'bg-slate-800 text-slate-700 hover:bg-slate-700'
             }`}
           >
             المولدات الكهربائية
@@ -261,7 +261,7 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
             className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
               filterCategory === 'إنارة'
                 ? 'bg-amber-600 text-white'
-                : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                : 'bg-slate-800 text-slate-700 hover:bg-slate-700'
             }`}
           >
             الإنارة
@@ -295,7 +295,7 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
               ? 'text-rose-400 bg-rose-950/60 border-rose-800'
               : ticket.priority === 'متوسطة'
               ? 'text-amber-400 bg-amber-950/60 border-amber-800'
-              : 'text-slate-400 bg-slate-800 border-slate-700';
+              : 'text-slate-800 bg-slate-800 border-slate-700';
 
           return (
             <div
@@ -310,12 +310,12 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
                     </span>
                     <h3 className="font-bold text-white text-sm">{ticket.title}</h3>
                   </div>
-                  <div className="text-xs text-slate-400 flex items-center gap-2">
+                  <div className="text-xs text-slate-800 flex items-center gap-2">
                     <Building2 className="w-3.5 h-3.5 text-cyan-400" />
                     <span>المحطة: <strong>{ticket.stationName}</strong></span>
                     {station && <PhoneLink phone={station.phone} name={station.name} variant="compact" />}
                     <span>•</span>
-                    <Calendar className="w-3.5 h-3.5 text-slate-400" />
+                    <Calendar className="w-3.5 h-3.5 text-slate-800" />
                     <span>تاريخ التدخل: {ticket.date}</span>
                   </div>
                 </div>
@@ -340,8 +340,8 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
               </div>
 
               {/* Description */}
-              <div className="text-xs text-slate-300 bg-slate-950/60 p-3 rounded-lg border border-slate-800 leading-relaxed">
-                <strong className="text-slate-400">التشخيص والعطل: </strong>
+              <div className="text-xs text-slate-700 bg-slate-950/60 p-3 rounded-lg border border-slate-800 leading-relaxed">
+                <strong className="text-slate-800">التشخيص والعطل: </strong>
                 {ticket.description}
               </div>
 
@@ -353,7 +353,7 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
                     {ticket.resolutionNotes}
                   </div>
                   <div className="flex items-center gap-1.5 shrink-0">
-                    <span className="text-[11px] text-slate-400">المكلف: {ticket.technicianName}</span>
+                    <span className="text-[11px] text-slate-800">المكلف: {ticket.technicianName}</span>
                     <PhoneLink phone={ticket.technicianPhone} name={ticket.technicianName} variant="compact" />
                   </div>
                 </div>
@@ -379,7 +379,7 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
             <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-950/60 shrink-0">
               <button
                 onClick={() => setIsAddModalOpen(false)}
-                className="p-1 text-slate-400 hover:text-white"
+                className="p-1 text-slate-800 hover:text-white"
               >
                 ✕
               </button>
@@ -393,7 +393,7 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
 
             <form onSubmit={handleSaveTicket} className="p-6 space-y-4 overflow-y-auto">
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   المحطة المعنية بالتدخل
                 </label>
                 <select
@@ -409,7 +409,7 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
                     تصنيف العطل
                   </label>
                   <select
@@ -425,7 +425,7 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
                     درجة الأولوية
                   </label>
                   <select
@@ -441,7 +441,7 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   عنوان التدخل / العطل
                 </label>
                 <input
@@ -455,7 +455,7 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   التشخيص وتفاصيل العطل
                 </label>
                 <textarea
@@ -470,7 +470,7 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
                     حالة الإصلاح
                   </label>
                   <select
@@ -485,7 +485,7 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
                     عون الصيانة المكلف
                   </label>
                   <input
@@ -499,7 +499,7 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   إجراءات المعالجة والملاحظات الفنية
                 </label>
                 <textarea
@@ -515,7 +515,7 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
                 <button
                   type="button"
                   onClick={() => setIsAddModalOpen(false)}
-                  className="px-4 py-2 bg-slate-800 text-slate-300 text-xs rounded-lg"
+                  className="px-4 py-2 bg-slate-800 text-slate-700 text-xs rounded-lg"
                 >
                   إلغاء
                 </button>
@@ -539,13 +539,13 @@ export const MaintenanceTab: React.FC<MaintenanceTabProps> = ({
               <AlertTriangle className="w-5 h-5 shrink-0" />
               <span>تأكيد مسح تقرير الصيانة</span>
             </div>
-            <p className="text-xs text-slate-300 leading-relaxed">
+            <p className="text-xs text-slate-700 leading-relaxed">
               هل أنت متأكد من مسح بطاقة الصيانة هذه نهائياً؟
             </p>
             <div className="flex items-center justify-end gap-2 pt-2">
               <button
                 onClick={() => setDeleteConfirmId(null)}
-                className="px-3.5 py-1.5 bg-slate-800 text-slate-300 text-xs rounded-lg"
+                className="px-3.5 py-1.5 bg-slate-800 text-slate-700 text-xs rounded-lg"
               >
                 تراجع
               </button>
