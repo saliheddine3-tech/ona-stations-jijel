@@ -104,9 +104,15 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Sync & Connectivity & User Profile Actions */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={onManualSync}
+          <button
+              onClick={() => {
+                onManualSync();
+                setTimeout(() => {
+                  if (syncStatus.isSyncing) {
+                    syncStatus.isSyncing = false;
+                  }
+                }, 5000);
+              }}
               disabled={syncStatus.isSyncing}
               className={`flex items-center gap-1.5 px-2.5 py-1 rounded text-xs transition-colors ${
                 syncStatus.isOnline
