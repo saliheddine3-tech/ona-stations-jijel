@@ -1,5 +1,5 @@
 // Service Worker for Station Center (مركز المحطات)
-const CACHE_NAME = 'station-center-v1';
+const CACHE_NAME = 'station-center-v2';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
