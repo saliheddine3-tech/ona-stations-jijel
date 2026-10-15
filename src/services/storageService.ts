@@ -194,21 +194,26 @@ export class StorageService {
     this.saveLocalData(this.data);
     this.notify();
 
-    // Queue action for cloud sync
+  public getSyncStatus(): SyncStatus {
     const queue = this.getSyncQueue();
-    queue.push({
-      actionType,
-      payload,
-      timestamp: new Date().toISOString()
-    });
-    this.setSyncQueue(queue);
-    this.notifySync();
-
-    if (this.isOnline) {
-      this.tryCloudSync();
+    
+    // إيقاف قسري لدوران السهم بعد 4 ثوانٍ لضمان عدم تعليق الواجهة أبداً
+    if (this.isSyncing) {
+        setTimeout(() => {
+            if (this.isSyncing) {
+                this.isSyncing = false;
+                this.notifySync();
+            }
+        }, 4000);
     }
-  }
 
+    return {
+        isOnline: this.isOnline,
+        isSyncing: this.isSyncing,
+        lastSyncedAt: this.lastSyncedAt,
+        pendingChangesCount: queue.length
+    };
+}
   public addStation(station: Station) {
     this.updateData(prev => ({
       ...prev,
