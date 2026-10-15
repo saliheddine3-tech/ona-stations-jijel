@@ -173,25 +173,25 @@ export const StationsTab: React.FC<StationsTabProps> = ({
       {/* Top Banner / Summary Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
         <div className="bg-slate-900 border border-slate-800 p-3.5 rounded-xl text-right">
-          <div className="text-xs text-slate-400 font-medium">إجمالي المحطات</div>
+          <div className="text-xs text-slate-800 font-medium">إجمالي المحطات</div>
           <div className="text-2xl font-black text-white mt-1">{totalStations}</div>
           <div className="text-[11px] text-cyan-400 mt-0.5">محطات رفع مركزية</div>
         </div>
 
         <div className="bg-slate-900 border border-emerald-900/40 p-3.5 rounded-xl text-right">
-          <div className="text-xs text-slate-400 font-medium">محطات جاهزة</div>
+          <div className="text-xs text-slate-800 font-medium">محطات جاهزة</div>
           <div className="text-2xl font-black text-emerald-400 mt-1">{readyCount}</div>
           <div className="text-[11px] text-emerald-500 mt-0.5">تعمل بكفاءة كاملة</div>
         </div>
 
         <div className="bg-slate-900 border border-amber-900/40 p-3.5 rounded-xl text-right">
-          <div className="text-xs text-slate-400 font-medium">محطات في الصيانة</div>
+          <div className="text-xs text-slate-800 font-medium">محطات في الصيانة</div>
           <div className="text-2xl font-black text-amber-400 mt-1">{maintCount}</div>
           <div className="text-[11px] text-amber-500 mt-0.5">تدخلات دورية وطارئة</div>
         </div>
 
         <div className="bg-slate-900 border border-rose-900/40 p-3.5 rounded-xl text-right">
-          <div className="text-xs text-slate-400 font-medium">محطات متوقفة</div>
+          <div className="text-xs text-slate-800 font-medium">محطات متوقفة</div>
           <div className="text-2xl font-black text-rose-400 mt-1">{stoppedCount}</div>
           <div className="text-[11px] text-rose-500 mt-0.5">تحتاج تدخل عاجل</div>
         </div>
