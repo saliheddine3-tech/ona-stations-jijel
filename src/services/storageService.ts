@@ -491,12 +491,18 @@ export class StorageService {
     }
   }
 
-      public async flushSyncQueue() {
+     // Cloud Synchronization
+  public async tryCloudSync() {
+    if (!this.isOnline || typeof window === 'undefined') return;
+
     const queue = this.getSyncQueue();
-    if (queue.length === 0 || !this.isOnline) return;
+    if (queue.length === 0) return;
 
     this.isSyncing = true;
     this.notifySync();
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000);
 
     try {
       const response = await fetch('/api/sync', {
@@ -505,16 +511,18 @@ export class StorageService {
         body: JSON.stringify({
           data: this.data,
           events: queue
-        })
+        }),
+        signal: controller.signal
       });
 
       if (response.ok) {
         this.setSyncQueue([]);
         this.lastSyncedAt = new Date().toLocaleTimeString();
       }
-    } catch {
-      // Keep queue for next attempt
+    } catch (error) {
+      console.warn('فشلت المزامنة أو انتهت المهلة:', error);
     } finally {
+      clearTimeout(timeoutId);
       this.isSyncing = false;
       this.notifySync();
     }
