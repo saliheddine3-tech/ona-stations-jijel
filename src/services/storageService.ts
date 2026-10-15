@@ -516,6 +516,4 @@ class StorageService {
 } finally {
   this.isSyncing = false;
   this.notifySync();
-    }
-    
-      
+}
