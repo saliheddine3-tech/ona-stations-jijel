@@ -128,14 +128,14 @@ export class StorageService {
   private initNetworkListeners() {
     if (typeof window === 'undefined') return;
 
-    window.addEventListener('online', () => {
+    window.addEventListener('online', async () => {
       this.isOnline = true;
-      this.notifySync();
-      this.flushSyncQueue();
+      await this.flushSyncQueue();
     });
 
     window.addEventListener('offline', () => {
       this.isOnline = false;
+      this.isSyncing = false;
       this.notifySync();
     });
   }
