@@ -513,21 +513,8 @@ class StorageService {
         this.lastSyncedAt = new Date().toLocaleTimeString('ar-DZ');
       }
     } catch {
-      // Keep queue for next attempt
-   } finally {
+  // Keep queue for next attempt
+} finally {
   this.isSyncing = false;
   this.notifySync();
 }
-      this.isSyncing = false;
-      this.notifySync();
-    }
-  }
-
-  public async manualSync(): Promise<boolean> {
-    await this.flushSyncQueue();
-    await this.tryCloudSync();
-    return true;
-  }
-}
-
-export const storageService = new StorageService();
