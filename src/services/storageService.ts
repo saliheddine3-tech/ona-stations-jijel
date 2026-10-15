@@ -507,14 +507,15 @@ class StorageService {
           events: queue
         })
       });
-
-      if (response.ok) {
-        this.setSyncQueue([]);
-        this.lastSyncedAt = new Date().toLocaleTimeString('ar-DZ');
-      }
-    } catch {
+   if (response.ok) {
+  this.setSyncQueue([]);
+  this.lastSyncedAt = new Date().toLocaleTimeString();
+}
+} catch {
   // Keep queue for next attempt
 } finally {
   this.isSyncing = false;
   this.notifySync();
-}
+    }
+    
+      
