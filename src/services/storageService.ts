@@ -11,7 +11,6 @@ export interface AppData {
 
 const STORAGE_KEY = 'markaz_al_mahattat_data_v1';
 
-// قائمة المحطات الأولية المباشرة لضمان عدم حدوث خطأ في الاستيراد (Import Error)
 const defaultStations: Station[] = [
   { id: '1', name: 'رقم 04 أولاد بوالنار', status: 'جاهزة', notes: 'تعمل بشكل جيد', lat: 36.8196211, lng: 5.7146666, flowRate: 5000, pumpsCount: 2, workersCount: 4 },
   { id: '2', name: 'محطة العرايش', status: 'صيانة', notes: 'صيانة دورية للمضخة 2', lat: 36.8188347, lng: 5.7337807, flowRate: 3000, pumpsCount: 2, workersCount: 4 },
@@ -40,18 +39,29 @@ class StorageService {
   private isSyncing = false;
   private lastSyncedAt: string | null = null;
   private isOnline = typeof navigator !== 'undefined' ? navigator.onLine : true;
+  private broadcastChannel: BroadcastChannel | null = null;
 
   constructor() {
     this.data = getInitialData();
     this.loadLocalData();
+    this.setupBroadcastChannel();
     this.setupNetworkListeners();
-    
-    if (typeof window !== 'undefined') {
-      this.tryCloudSync();
-      // مزامنة تلقائية كل 10 ثوان لمزامن البيانات بين الهاتف والكمبيوتر
-      setInterval(() => {
-        this.tryCloudSync();
-      }, 10000);
+  }
+
+  private setupBroadcastChannel() {
+    if (typeof window !== 'undefined' && 'BroadcastChannel' in window) {
+      try {
+        this.broadcastChannel = new BroadcastChannel('ona_sync_channel');
+        this.broadcastChannel.onmessage = (event) => {
+          if (event.data && event.data.type === 'DATA_UPDATED' && event.data.payload) {
+            this.data = event.data.payload;
+            this.saveLocalData(this.data, false);
+            this.notify();
+          }
+        };
+      } catch (e) {
+        console.warn('BroadcastChannel not supported');
+      }
     }
   }
 
@@ -80,12 +90,15 @@ class StorageService {
     }
   }
 
-  private saveLocalData(data: AppData) {
+  private saveLocalData(data: AppData, broadcast = true) {
     if (typeof window === 'undefined') return;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      if (broadcast && this.broadcastChannel) {
+        this.broadcastChannel.postMessage({ type: 'DATA_UPDATED', payload: data });
+      }
     } catch (e) {
-      console.error('خطأ في حفظ التخزين المحلي:', e);
+      console.error('خطأ في حفظ البيانات:', e);
     }
   }
 
@@ -134,7 +147,7 @@ class StorageService {
           })
         });
       } catch (e) {
-        console.warn('تعذر إرسال التحديث للسيرفر:', e);
+        // الاستضافة الثابتة لا تدعم POST، يتم معالجة الخطأ بصمت لعدم تعطيل الواجهة
       }
     }
     this.notifySync();
@@ -157,7 +170,7 @@ class StorageService {
         }
       }
     } catch (error) {
-      // تجاهل أخطاء الشبكة المؤقتة
+      // تجنب توقف الصفحة في حال غياب خادم الـ API
     } finally {
       this.isSyncing = false;
       this.lastSyncedAt = new Date().toISOString();
@@ -165,7 +178,6 @@ class StorageService {
     }
   }
 
-  // دوال التفاعل مع التطبيق
   public updateStation(id: string, updates: Partial<Station>) {
     this.updateData(prev => ({
       ...prev,
