@@ -146,25 +146,9 @@ export class StorageService {
   }
 
  public getSyncStatus(): SyncStatus {
-    const queue = this.getSyncQueue();
-    
-    // إيقاف قسري لدوران السهم بعد 4 ثوانٍ لضمان عدم تعليق الواجهة أبداً
-    if (this.isSyncing) {
-        setTimeout(() => {
-            if (this.isSyncing) {
-                this.isSyncing = false;
-                this.notifySync();
-            }
-        }, 4000);
-    }
-
-    return {
-        isOnline: this.isOnline,
-        isSyncing: this.isSyncing,
-        lastSyncedAt: this.lastSyncedAt,
-        pendingChangesCount: queue.length
-    };
-}
+        const queue = this.getSyncQueue();
+        return {
+           
 public getSyncStatus(): SyncStatus {
         const queue = this.getSyncQueue();
         return {
