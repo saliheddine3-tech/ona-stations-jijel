@@ -1,13 +1,10 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(),
-  ],
-  base: '/ona-stations-jijel/',
-})
-
+  plugins: [react()],
+  base: './', // يضمن توافق مسارات الملفات مع GitHub Pages
+  build: {
+    outDir: 'dist'
+  }
+});
