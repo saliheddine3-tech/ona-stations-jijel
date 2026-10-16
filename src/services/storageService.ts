@@ -165,20 +165,15 @@ export class StorageService {
         pendingChangesCount: queue.length
     };
 }
-    return {
-        isOnline: this.isOnline,
-        isSyncing: this.isSyncing,
-        lastSyncedAt: this.lastSyncedAt,
-        pendingChangesCount: queue.length
-    };
-}
-
-    return {
-        isOnline: this.isOnline,
-        isSyncing: this.isSyncing,
-        lastSyncedAt: this.lastSyncedAt,
-        pendingChangesCount: queue.length
-    };
+public getSyncStatus(): SyncStatus {
+        const queue = this.getSyncQueue();
+        return {
+            isOnline: this.isOnline,
+            isSyncing: this.isSyncing,
+            lastSyncedAt: this.lastSyncedAt,
+            pendingChangesCount: queue.length
+        };
+    }
 }
   public getData(): AppData {
     return this.data;
