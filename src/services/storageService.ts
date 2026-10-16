@@ -178,7 +178,6 @@ public getSyncStatus(): SyncStatus {
     public getData(): AppData {
         return this.data;
     }
-
   public subscribe(listener: Listener): () => void {
     this.listeners.add(listener);
     return () => this.listeners.delete(listener);
