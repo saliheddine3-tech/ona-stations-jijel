@@ -145,18 +145,20 @@ export class StorageService {
     }
   }
 
-public getSyncStatus(): SyncStatus {
-        const queue = this.getSyncQueue();
-        return {
-            isOnline: this.isOnline,
-            isSyncing: this.isSyncing,
-            lastSyncedAt: this.lastSyncedAt,
-            pendingChangesCount: queue.length
-        };
-    }
-    public getData(): AppData {
-        return this.data;
-    }
+  public getSyncStatus(): SyncStatus {
+    const queue = this.getSyncQueue();
+    return {
+      isOnline: this.isOnline,
+      isSyncing: this.isSyncing,
+      lastSyncedAt: this.lastSyncedAt,
+      pendingChangesCount: queue.length
+    };
+  }
+
+  public getData(): AppData {
+    return this.data;
+  }
+
   public subscribe(listener: Listener): () => void {
     this.listeners.add(listener);
     return () => this.listeners.delete(listener);
@@ -182,27 +184,21 @@ public getSyncStatus(): SyncStatus {
     this.saveLocalData(this.data);
     this.notify();
 
- // Queue action for cloud sync
+    // Queue action for cloud sync
     const queue = this.getSyncQueue();
     queue.push({
-        actionType,
-        payload,
-        timestamp: new Date().toISOString()
+      actionType,
+      payload,
+      timestamp: new Date().toISOString()
     });
     this.setSyncQueue(queue);
     this.notifySync();
 
     if (this.isOnline) {
-        this.tryCloudSync();
+      this.tryCloudSync();
     }
-}
-    return {
-        isOnline: this.isOnline,
-        isSyncing: this.isSyncing,
-        lastSyncedAt: this.lastSyncedAt,
-        pendingChangesCount: queue.length
-    };
-}
+  }
+
   public addStation(station: Station) {
     this.updateData(prev => ({
       ...prev,
@@ -274,45 +270,43 @@ public getSyncStatus(): SyncStatus {
   }
 
   // Cloud Synchronization with forced timeout protection
-  // Cloud Synchronization with forced timeout protection
-    public async tryCloudSync() {
-        if (typeof window === 'undefined') return;
+  public async tryCloudSync() {
+    if (typeof window === 'undefined') return;
 
-        if (!this.isOnline) {
-            this.isSyncing = false;
-            this.notifySync();
-            return;
-        }
-
-        const queue = this.getSyncQueue();
-        if (queue.length === 0) {
-            this.isSyncing = false;
-            this.notifySync();
-            return;
-        }
-
-        if (this.isSyncing) return;
-
-        this.isSyncing = true;
-        this.notifySync();
-
-        // حارس أمان: إيقاف السهم قسرياً بعد 4 ثوانٍ مهما كانت النتيجة
-        const safetyTimeout = setTimeout(() => {
-            if (this.isSyncing) {
-                this.isSyncing = false;
-                this.notifySync();
-            }
-        }, 4000);
-
-        try {
-            // تفريغ قائمة الانتظار وتحديث وقت آخر مزامنة
-            this.setSyncQueue([]);
-            this.lastSyncedAt = new Date().toISOString();
-        } catch (error) {
-            console.error('خطأ في المزامنة السحابية:', error);
-        } finally {
-            clearTimeout(safetyTimeout);
-            this.isSyncing = false;
-            this.notifySync();
-        }
+    if (!this.isOnline) {
+      this.isSyncing = false;
+      this.notifySync();
+      return;
     }
+
+    const queue = this.getSyncQueue();
+    if (queue.length === 0) {
+      this.isSyncing = false;
+      this.notifySync();
+      return;
+    }
+
+    if (this.isSyncing) return;
+
+    this.isSyncing = true;
+    this.notifySync();
+
+    const safetyTimeout = setTimeout(() => {
+      if (this.isSyncing) {
+        this.isSyncing = false;
+        this.notifySync();
+      }
+    }, 4000);
+
+    try {
+      this.setSyncQueue([]);
+      this.lastSyncedAt = new Date().toISOString();
+    } catch (error) {
+      console.error('خطأ في المزامنة السحابية:', error);
+    } finally {
+      clearTimeout(safetyTimeout);
+      this.isSyncing = false;
+      this.notifySync();
+    }
+  }
+}
