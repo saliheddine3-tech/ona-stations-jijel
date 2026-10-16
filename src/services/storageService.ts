@@ -165,6 +165,13 @@ export class StorageService {
         pendingChangesCount: queue.length
     };
 }
+    return {
+        isOnline: this.isOnline,
+        isSyncing: this.isSyncing,
+        lastSyncedAt: this.lastSyncedAt,
+        pendingChangesCount: queue.length
+    };
+}
 
     return {
         isOnline: this.isOnline,
