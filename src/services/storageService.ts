@@ -184,7 +184,6 @@ export class StorageService {
     this.saveLocalData(this.data);
     this.notify();
 
-    // Queue action for cloud sync
     const queue = this.getSyncQueue();
     queue.push({
       actionType,
@@ -269,7 +268,6 @@ export class StorageService {
     }), 'DELETE_ADMINISTRATOR', { adminId });
   }
 
-  // Cloud Synchronization with forced timeout protection
   public async tryCloudSync() {
     if (typeof window === 'undefined') return;
 
@@ -310,3 +308,6 @@ export class StorageService {
     }
   }
 }
+
+// تصدير الكائن ليتوافق مع استيراد المكونات (storageService)
+export const storageService = new StorageService();
