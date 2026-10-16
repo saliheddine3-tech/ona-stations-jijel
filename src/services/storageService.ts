@@ -173,10 +173,11 @@ public getSyncStatus(): SyncStatus {
             lastSyncedAt: this.lastSyncedAt,
             pendingChangesCount: queue.length
         };
-  }
-  public getData(): AppData {
-    return this.data;
-  }
+    }
+
+    public getData(): AppData {
+        return this.data;
+    }
 
   public subscribe(listener: Listener): () => void {
     this.listeners.add(listener);
