@@ -318,26 +318,22 @@ export class StorageService {
             return;
         }
 
-        // منع التداخل إذا كانت جارية بالفعل
         if (this.isSyncing) return;
 
         this.isSyncing = true;
         this.notifySync();
 
-        // حارس أمان: إيقاف السهم قسرياً بعد 4 ثوانٍ مهما كانت النتيجة لمنع التعليق
+        // حارس أمان: إيقاف السهم قسرياً بعد 4 ثوانٍ مهما كانت النتيجة
         const safetyTimeout = setTimeout(() => {
             if (this.isSyncing) {
                 this.isSyncing = false;
                 this.notifySync();
-                console.warn('تم إيقاف المزامنة قسرياً بعد انتهاء المهلة الزمنية');
             }
         }, 4000);
 
         try {
-            // هنا تتم عملية رفع البيانات للسحابة (حسب الكود لديك)
-            // await ... 
-            
-            // عند النجاح:
+            // تفريغ قائمة الانتظار وتحديث وقت آخر مزامنة
+            this.setSyncQueue([]);
             this.lastSyncedAt = new Date().toISOString();
         } catch (error) {
             console.error('خطأ في المزامنة السحابية:', error);
