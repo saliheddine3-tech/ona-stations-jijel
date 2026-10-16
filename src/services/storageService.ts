@@ -1,5 +1,4 @@
 import { Station, Worker, AdminUser, EmergencyAlert, SupervisorMessage } from '../types';
-import { initialStations } from '../data/initialStations';
 
 export interface AppData {
   stations: Station[];
@@ -12,8 +11,21 @@ export interface AppData {
 
 const STORAGE_KEY = 'markaz_al_mahattat_data_v1';
 
+// قائمة المحطات الأولية المباشرة لضمان عدم حدوث خطأ في الاستيراد (Import Error)
+const defaultStations: Station[] = [
+  { id: '1', name: 'رقم 04 أولاد بوالنار', status: 'جاهزة', notes: 'تعمل بشكل جيد', lat: 36.8196211, lng: 5.7146666, flowRate: 5000, pumpsCount: 2, workersCount: 4 },
+  { id: '2', name: 'محطة العرايش', status: 'صيانة', notes: 'صيانة دورية للمضخة 2', lat: 36.8188347, lng: 5.7337807, flowRate: 3000, pumpsCount: 2, workersCount: 4 },
+  { id: '3', name: 'محطة العوانة', status: 'صيانة', notes: 'مشكل في المولد الكهربائي', lat: 36.8141122, lng: 5.6068716, flowRate: 3500, pumpsCount: 2, workersCount: 4 },
+  { id: '4', name: 'محطة برج بليدة', status: 'متوقفة', notes: 'المضخة رقم 1 متوقفة', lat: 36.7955434, lng: 5.6631320, flowRate: 2540, pumpsCount: 2, workersCount: 4 },
+  { id: '5', name: 'محطة الشالات', status: 'جاهزة', notes: 'تعمل بشكل جيد', lat: 36.7775786, lng: 5.6281670, flowRate: 3000, pumpsCount: 2, workersCount: 5 },
+  { id: '6', name: 'محطة التشلاولة', status: 'جاهزة', notes: 'تعمل بشكل جيد', lat: 36.8046189, lng: 5.8080554, flowRate: 2000, pumpsCount: 2, workersCount: 4 },
+  { id: '7', name: 'محطة الشاطئ', status: 'جاهزة', notes: 'تعمل بشكل جيد', lat: 36.8115470, lng: 5.7786021, flowRate: 3500, pumpsCount: 2, workersCount: 5 },
+  { id: '8', name: 'محطة المسمكة', status: 'جاهزة', notes: 'تعمل بشكل جيد', lat: 36.8229486, lng: 5.7695526, flowRate: 2540, pumpsCount: 2, workersCount: 4 },
+  { id: '9', name: 'محطة رأس العافية', status: 'متوقفة', notes: 'انقطاع التيار الكهربائي', lat: 36.8141357, lng: 5.6968091, flowRate: 1500, pumpsCount: 2, workersCount: 4 }
+];
+
 const getInitialData = (): AppData => ({
-  stations: initialStations,
+  stations: defaultStations,
   workers: [],
   adminUsers: [],
   emergencyAlerts: [],
@@ -35,9 +47,8 @@ class StorageService {
     this.setupNetworkListeners();
     
     if (typeof window !== 'undefined') {
-      // محاولة مزامنة أولية من السيرفر
       this.tryCloudSync();
-      // مزامنة دورية كل 10 ثوان لضمان المزامنة الجماعية الفورية بين الهواتف والكمبيوتر
+      // مزامنة تلقائية كل 10 ثوان لمزامن البيانات بين الهاتف والكمبيوتر
       setInterval(() => {
         this.tryCloudSync();
       }, 10000);
@@ -112,7 +123,6 @@ class StorageService {
     this.saveLocalData(this.data);
     this.notify();
 
-    // إرسال التحديثات للسيرفر المركزي لكي يراها باقي المستخدمين لحظياً
     if (this.isOnline) {
       try {
         await fetch('/api/sync', {
@@ -141,14 +151,13 @@ class StorageService {
       if (res.ok) {
         const serverData = await res.json();
         if (serverData && serverData.stations) {
-          // دمج البيانات إذا كان الخادم أحدث
           this.data = serverData;
           this.saveLocalData(this.data);
           this.notify();
         }
       }
     } catch (error) {
-      // تجاهل أخطاء الاتصال المؤقتة بصمت
+      // تجاهل أخطاء الشبكة المؤقتة
     } finally {
       this.isSyncing = false;
       this.lastSyncedAt = new Date().toISOString();
@@ -156,7 +165,7 @@ class StorageService {
     }
   }
 
-  // دوال إدارة المحطات والعمال والرسائل
+  // دوال التفاعل مع التطبيق
   public updateStation(id: string, updates: Partial<Station>) {
     this.updateData(prev => ({
       ...prev,
