@@ -148,7 +148,7 @@ export class StorageService {
  public getSyncStatus(): SyncStatus {
     const queue = this.getSyncQueue();
     
-    // حماية أمان إضافية: إذا ظلت حالة isSyncing مفعلة لأكثر من 4 ثوانٍ، يتم إيقافها قسرياً لمنع تعليق السهم
+    // إيقاف قسري لدوران السهم بعد 4 ثوانٍ لضمان عدم تعليق الواجهة أبداً
     if (this.isSyncing) {
         setTimeout(() => {
             if (this.isSyncing) {
@@ -157,6 +157,14 @@ export class StorageService {
             }
         }, 4000);
     }
+
+    return {
+        isOnline: this.isOnline,
+        isSyncing: this.isSyncing,
+        lastSyncedAt: this.lastSyncedAt,
+        pendingChangesCount: queue.length
+    };
+}
 
     return {
         isOnline: this.isOnline,
@@ -194,19 +202,20 @@ export class StorageService {
     this.saveLocalData(this.data);
     this.notify();
 
-  public getSyncStatus(): SyncStatus {
+ // Queue action for cloud sync
     const queue = this.getSyncQueue();
-    
-    // إيقاف قسري لدوران السهم بعد 4 ثوانٍ لضمان عدم تعليق الواجهة أبداً
-    if (this.isSyncing) {
-        setTimeout(() => {
-            if (this.isSyncing) {
-                this.isSyncing = false;
-                this.notifySync();
-            }
-        }, 4000);
-    }
+    queue.push({
+        actionType,
+        payload,
+        timestamp: new Date().toISOString()
+    });
+    this.setSyncQueue(queue);
+    this.notifySync();
 
+    if (this.isOnline) {
+        this.tryCloudSync();
+    }
+}
     return {
         isOnline: this.isOnline,
         isSyncing: this.isSyncing,
