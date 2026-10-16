@@ -145,10 +145,6 @@ export class StorageService {
     }
   }
 
- public getSyncStatus(): SyncStatus {
-        const queue = this.getSyncQueue();
-        return {
-           
 public getSyncStatus(): SyncStatus {
         const queue = this.getSyncQueue();
         return {
@@ -158,7 +154,6 @@ public getSyncStatus(): SyncStatus {
             pendingChangesCount: queue.length
         };
     }
-
     public getData(): AppData {
         return this.data;
     }
