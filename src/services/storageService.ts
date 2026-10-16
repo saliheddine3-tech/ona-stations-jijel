@@ -268,6 +268,27 @@ export class StorageService {
     }), 'DELETE_ADMINISTRATOR', { adminId });
   }
 
+  public addEmergencyAlert(alert: EmergencyAlert) {
+    this.updateData(prev => ({
+      ...prev,
+      emergencyAlerts: [alert, ...(prev.emergencyAlerts || INITIAL_EMERGENCY_ALERTS)]
+    }), 'ADD_EMERGENCY_ALERT', alert);
+  }
+
+  public deleteEmergencyAlert(alertId: string) {
+    this.updateData(prev => ({
+      ...prev,
+      emergencyAlerts: (prev.emergencyAlerts || INITIAL_EMERGENCY_ALERTS).filter(a => a.id !== alertId)
+    }), 'DELETE_EMERGENCY_ALERT', { alertId });
+  }
+
+  public addSupervisorMessage(message: SupervisorMessage) {
+    this.updateData(prev => ({
+      ...prev,
+      supervisorMessages: [message, ...(prev.supervisorMessages || INITIAL_SUPERVISOR_MESSAGES)]
+    }), 'ADD_SUPERVISOR_MESSAGE', message);
+  }
+
   public async tryCloudSync() {
     if (typeof window === 'undefined') return;
 
@@ -309,5 +330,5 @@ export class StorageService {
   }
 }
 
-// تصدير الكائن ليتوافق مع استيراد المكونات (storageService)
 export const storageService = new StorageService();
+  
