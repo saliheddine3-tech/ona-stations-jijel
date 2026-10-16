@@ -3,9 +3,8 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: './',
+  base: '/ona-stations-jijel/',
   build: {
-    outDir: 'dist',
-    assetsDir: 'assets'
+    outDir: 'dist'
   }
 });
