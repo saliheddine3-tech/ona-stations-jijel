@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: './', // يضمن توافق مسارات الملفات مع GitHub Pages
+  base: '/ona-stations-jijel/',
   build: {
     outDir: 'dist'
   }
